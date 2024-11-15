@@ -16,38 +16,41 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
 2) On the Add Data screen select <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_06_add_data_upload.png)
 
-3) Drag and drop the files into the Files section so that they are uploaded.  When finished, you can exit the screen.  <BR>&nbsp;<BR>
+3) Drag and drop the files into the Files section so that they are uploaded.  When finished, make sure to copy the file uploaded to paths so they can be used later.  <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_07_add_files.png)
 
-4) We are not going to run the notebook, but we will need these file path for our COPY INTO command in a later step
+4) You can exit the Add data screen by clicking on the SQL Editor in the left navigation menu.  
 
-```sql
-CREATE TABLE default.nyc_yellow_taxi (
-doLocationId string,
-endLat double,
-endLon double,
-extra double,
-fareAmount double,
-improvementSurcharge string,
-mtaTax double,
-passengerCount int,
-paymentType string,
-puLocationId string,
-puMonth int,
-puYear int,
-rateCodeId int,
-startLat double,
-startLon double,
-storeAndFwdFlag string,
-tipAmount double,
-tollsAmount double,
-totalAmount double,
-tpepDropoffDateTime timestamp,
-tpepPickupDateTime timestamp,
-tripDistance double,
-vendorID int
-);
-```
+5) Next click + in the upper left to create a new query window. <BR>&nbsp;<BR>
+![picture alt](/imagery/dwh_08_add_query.png)
+
+6) Create the table by copying the code below and running the query.
+
+    ```sql
+    DROP TABLE IF EXISTS default.nyc_yellow_taxi_hive;
+
+    CREATE TABLE default.nyc_yellow_taxi_hive ( 
+        VendorID BIGINT, 
+        tpep_pickup_datetime TIMESTAMP_NTZ, 
+        tpep_dropoff_datetime TIMESTAMP_NTZ, 
+        passenger_count DOUBLE, 
+        trip_distance DOUBLE, 
+        RatecodeID DOUBLE, 
+        store_and_fwd_flag STRING, 
+        PULocationID BIGINT, 
+        DOLocationID BIGINT, 
+        payment_type BIGINT, 
+        fare_amount DOUBLE, 
+        extra DOUBLE, 
+        mta_tax DOUBLE, 
+        tip_amount DOUBLE, 
+        tolls_amount DOUBLE, 
+        improvement_surcharge DOUBLE, 
+        total_amount DOUBLE, 
+        congestion_surcharge DOUBLE, 
+        airport_fee DOUBLE 
+    );
+    ```
 
 ```sql
 
