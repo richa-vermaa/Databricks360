@@ -114,3 +114,5 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     ```
 
 9. Use the Databricks Assistant to change the above query to avg distance by weekday. 
+
+10. Use the Databricks Assistant to change the above query to avg tip amount by weekday. 
