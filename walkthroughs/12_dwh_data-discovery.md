@@ -52,7 +52,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     );
     ```
 
-5) Click + again to create a new query window and run the query below.
+7) Click + again to create a new query window and run the query below.
 
     ```sql
     COPY INTO hive_metastore.default.nyc_yellow_taxi
