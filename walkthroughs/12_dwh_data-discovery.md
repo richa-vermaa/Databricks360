@@ -16,7 +16,10 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
 2) On the Add Data screen select <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_06_add_data_upload.png)
 
-3) Drag and drop the files into the Files section so that they are uploaded and then click Create Table with Notebook.  We are not going to run the notebook, but we will need these file path for our COPY INTO command in a later step.
+3) Drag and drop the files into the Files section so that they are uploaded.  When finished, you can exit the screen.  <BR>&nbsp;<BR>
+![picture alt](/imagery/dwh_07_add_files.png)
+
+4) We are not going to run the notebook, but we will need these file path for our COPY INTO command in a later step
 
 ```sql
 CREATE TABLE default.nyc_yellow_taxi (
