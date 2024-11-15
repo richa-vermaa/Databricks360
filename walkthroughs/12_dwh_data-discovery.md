@@ -9,22 +9,22 @@ Please download the following files:
 * [April 2024 - Yellow Taxi Trip Records (PARQUET)](https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-04.parquet)
 
 
-1) Our first step is to add the January - April 2024 Yellow Taxi Trip Records files to the Databricks File Store (DBFS).  To do so, go to Catalog and click + (Add Data)  <BR>&nbsp;<BR>
+1. Our first step is to add the January - April 2024 Yellow Taxi Trip Records files to the Databricks File Store (DBFS).  To do so, go to Catalog and click + (Add Data)  <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_05_add_data.jpeg)<BR>&nbsp;<BR>
 NOTE: For this lab we are using the DBFS for ease of use.  In most customer scenarios, you would upload the files to an external Volume within Unity Catalog. <BR>&nbsp;<BR>
 
-2) On the Add Data screen select <BR>&nbsp;<BR>
+2. On the Add Data screen select <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_06_add_data_upload.png)
 
-3) Drag and drop the files into the Files section so that they are uploaded.  When finished, make sure to copy the file uploaded to paths so they can be used later.  <BR>&nbsp;<BR>
+3. Drag and drop the files into the Files section so that they are uploaded.  When finished, make sure to copy the file uploaded to paths so they can be used later.  <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_07_add_files.png)
 
-4) You can exit the Add data screen by clicking on the SQL Editor in the left navigation menu.  
+4. You can exit the Add data screen by clicking on the SQL Editor in the left navigation menu.  
 
-5) Next click + in the upper left to create a new query window. <BR>&nbsp;<BR>
+5. Next click + in the upper left to create a new query window. <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_08_add_query.png)
 
-6) Create the table by copying the code below and running the query.
+6. Create the table by copying the code below and running the query.
 
     ```sql
     DROP TABLE IF EXISTS  hive_metastore.default.nyc_yellow_taxi;
@@ -52,7 +52,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     );
     ```
 
-7) Click + again to create a new query window and run the query below.
+7. Click + again to create a new query window and run the query below.
 
     ```sql
     COPY INTO hive_metastore.default.nyc_yellow_taxi
@@ -84,3 +84,33 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     COPY_OPTIONS ('mergeSchema' = 'true');
     ```
     NOTE:  This assumes all your .parquet files are in /FileStore/tables/ and you want to copy all of them. If you only want to copy the specified files, ensure they are the only .parquet files in the directory or adjust the path and pattern to specifically match the files you're interested in.
+
+8. Use the following query to determine average trip time by weekday
+
+    ```sql
+    SELECT 
+    CASE 
+        WHEN dayofweek(tpep_pickup_datetime) = 1 THEN 'Sunday'
+        WHEN dayofweek(tpep_pickup_datetime) = 2 THEN 'Monday'
+        WHEN dayofweek(tpep_pickup_datetime) = 3 THEN 'Tuesday'
+        WHEN dayofweek(tpep_pickup_datetime) = 4 THEN 'Wednesday'
+        WHEN dayofweek(tpep_pickup_datetime) = 5 THEN 'Thursday'
+        WHEN dayofweek(tpep_pickup_datetime) = 6 THEN 'Friday'
+        WHEN dayofweek(tpep_pickup_datetime) = 7 THEN 'Saturday'
+    END AS weekday,
+    AVG(unix_timestamp(tpep_dropoff_datetime) - unix_timestamp(tpep_pickup_datetime)) / 60 AS avg_trip_time_minutes
+    FROM hive_metastore.default.nyc_yellow_taxi
+    GROUP BY 
+    CASE 
+        WHEN dayofweek(tpep_pickup_datetime) = 1 THEN 'Sunday'
+        WHEN dayofweek(tpep_pickup_datetime) = 2 THEN 'Monday'
+        WHEN dayofweek(tpep_pickup_datetime) = 3 THEN 'Tuesday'
+        WHEN dayofweek(tpep_pickup_datetime) = 4 THEN 'Wednesday'
+        WHEN dayofweek(tpep_pickup_datetime) = 5 THEN 'Thursday'
+        WHEN dayofweek(tpep_pickup_datetime) = 6 THEN 'Friday'
+        WHEN dayofweek(tpep_pickup_datetime) = 7 THEN 'Saturday'
+    END
+    ORDER BY weekday;
+    ```
+
+9. Use the Databricks Assistant to change the above query to avg distance by weekday. 
