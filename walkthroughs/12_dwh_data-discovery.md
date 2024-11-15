@@ -27,9 +27,9 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
 6) Create the table by copying the code below and running the query.
 
     ```sql
-    DROP TABLE IF EXISTS default.nyc_yellow_taxi_hive;
+    DROP TABLE IF EXISTS  hive_metastore.default.nyc_yellow_taxi;
 
-    CREATE TABLE default.nyc_yellow_taxi_hive ( 
+    CREATE TABLE  hive_metastore.default.nyc_yellow_taxi ( 
         VendorID BIGINT, 
         tpep_pickup_datetime TIMESTAMP_NTZ, 
         tpep_dropoff_datetime TIMESTAMP_NTZ, 
@@ -52,11 +52,35 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     );
     ```
 
-```sql
+5) Click + again to create a new query window and run the query below.
 
-COPY INTO  default.nyc_yellow_taxi2
-FROM 'dbfs:/Workspace/Users/admin@mngenvmcap230221.onmicrosoft.com/data/yellow_tripdata_2023-01.parquet'
-FILEFORMAT = PARQUET
-FORMAT_OPTIONS ('mergeSchema' = 'true')
-COPY_OPTIONS ('mergeSchema' = 'true');
-```
+    ```sql
+    COPY INTO hive_metastore.default.nyc_yellow_taxi
+    FROM (
+    SELECT 
+        CAST(VendorID AS BIGINT) AS VendorID,
+        CAST(tpep_pickup_datetime AS timestamp) as tpep_pickup_datetime,
+        CAST(tpep_dropoff_datetime AS timestamp) as tpep_dropoff_datetime,
+        CAST(passenger_count AS DOUBLE) as passenger_count,
+        trip_distance,
+        CAST(RatecodeID as DOUBLE) as RatecodeID,
+        store_and_fwd_flag,
+        CAST(PULocationID AS BIGINT) AS PULocationID, 
+        CAST(DOLocationID AS BIGINT) AS DOLocationID, 
+        payment_type,
+        fare_amount,
+        extra,
+        mta_tax,
+        tip_amount,
+        tolls_amount,
+        improvement_surcharge,
+        total_amount,
+        congestion_surcharge,
+        airport_fee
+    FROM '/FileStore/tables/'
+    )
+    FILEFORMAT = PARQUET 
+    FORMAT_OPTIONS ('mergeSchema' = 'true') 
+    COPY_OPTIONS ('mergeSchema' = 'true');
+    ```
+    NOTE:  This assumes all your .parquet files are in /FileStore/tables/ and you want to copy all of them. If you only want to copy the specified files, ensure they are the only .parquet files in the directory or adjust the path and pattern to specifically match the files you're interested in.
