@@ -1,3 +1,4 @@
+# Create a SQL Warehouse
 
 ![Create New Warehouse](/imagery/Azure_Databricks.jpg)
 

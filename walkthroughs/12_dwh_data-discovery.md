@@ -1,3 +1,5 @@
+# Query Data in a Databricks SQL Warehouse
+
 This exercise uses the NYC Taxi Open Dataset that cound be found at [NYC Taxi and Limousine yellow dataset - Azure Open Datasets | Microsoft Learn](https://learn.microsoft.com/en-us/azure/open-datasets/dataset-taxi-yellow?tabs=azureml-opendatasets).
 
 For this specific example we are using the January-April 2024 Yellow Taxi Trip Records (Parquet) files that can be found at [TLC Trip Record Data - TLC](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page). 
