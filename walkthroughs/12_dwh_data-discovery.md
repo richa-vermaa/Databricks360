@@ -61,8 +61,8 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     FROM (
     SELECT 
         CAST(VendorID AS BIGINT) AS VendorID,
-        CAST(tpep_pickup_datetime AS timestamp) as tpep_pickup_datetime,
-        CAST(tpep_dropoff_datetime AS timestamp) as tpep_dropoff_datetime,
+        CAST(tpep_pickup_datetime AS TIMESTAMP_NTZ) as tpep_pickup_datetime,
+        CAST(tpep_dropoff_datetime AS TIMESTAMP_NTZ) as tpep_dropoff_datetime,
         CAST(passenger_count AS DOUBLE) as passenger_count,
         trip_distance,
         CAST(RatecodeID as DOUBLE) as RatecodeID,
