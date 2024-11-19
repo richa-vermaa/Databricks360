@@ -87,8 +87,36 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     ```
     NOTE:  This assumes all your .parquet files are in /FileStore/tables/ and you want to copy all of them. If you only want to copy the specified files, ensure they are the only .parquet files in the directory or adjust the path and pattern to specifically match the files you're interested in.
 
-8. Use the following query to determine average trip time by weekday
+8. Create table without having to specify a schema. All files in the folder should have same schema for the table creation to be successful. 
+   ```sql
+    CREATE or REPLACE TABLE  hive_metastore.default.nyc_yellow_taxi_test
+    USING PARQUET
+    LOCATION '/FileStore/tables/';
+   ```
+   Run below command to validate the table properties.
+   ```sql
+    DESCRIBE EXTENDED hive_metastore.default.nyc_yellow_taxi_test;
+   ```
+   NOTE: Scroll through the properties to verify that the table type is EXTERNAL.
+   
+9. Create a Delta table using table created in previous step to run data manipulation queries. 
+   ```sql
+    CREATE TABLE  hive_metastore.default.nyc_yellow_taxi_delta
+    USING DELTA
+    AS SELECT * FROM  hive_metastore.default.nyc_yellow_taxi;
+   ``` 
+   Run below command to validate the table properties.
+   ```sql
+    DESCRIBE EXTENDED hive_metastore.default.nyc_yellow_taxi_delta;
+   ```
+   NOTE: Scroll through the properties to verify that the table type is MANAGED.
+   
+10. Select 10 rows from table 
+    ```sql
+    SELECT * FROM hive_metastore.default.nyc_yellow_taxi LIMIT 10;
+    ```
 
+11. Use the following query to determine average trip time by weekday
     ```sql
     SELECT 
     CASE 
@@ -115,6 +143,29 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     ORDER BY weekday;
     ```
 
-9. Use the Databricks Assistant to change the above query to avg distance by weekday. 
+12. Use the Databricks Assistant to change the above query to avg distance by weekday. 
 
-10. Use the Databricks Assistant to change the above query to avg tip amount by weekday. 
+13. Use the Databricks Assistant to change the above query to avg tip amount by weekday. 
+
+14. Delete records from Delta table
+    ```sql
+    DELETE FROM hive_metastore.default.nyc_yellow_taxi_delta WHERE VendorID = 1;
+    ```
+
+16. Insert more data into Delta table
+    ```sql
+    INSERT INTO hive_metastore.default.nyc_yellow_taxi_delta
+    select * from hive_metastore.default.nyc_yellow_taxi WHERE VendorID = 1;
+    ```
+
+17. Update records in Delta table
+    ```sql
+    UPDATE hive_metastore.default.nyc_yellow_taxi_delta
+    SET tip_amount = 5
+    where VendorID = 1 and DOLocationID = 7;
+    ```
+
+19. Drop the table
+    ```sql
+    DROP TABLE hive_metastore.default.nyc_yellow_taxi;
+    ```
