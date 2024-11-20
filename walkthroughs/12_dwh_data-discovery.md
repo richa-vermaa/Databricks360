@@ -89,7 +89,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
 
 8. Create table without having to specify a schema. All files in the folder should have same schema for the table creation to be successful. 
    ```sql
-    CREATE or REPLACE TABLE  hive_metastore.default.nyc_yellow_taxi_test
+    CREATE TABLE  hive_metastore.default.nyc_yellow_taxi_test
     USING PARQUET
     LOCATION '/FileStore/tables/';
    ```
@@ -111,7 +111,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
    ```
    NOTE: Scroll through the properties to verify that the table type is MANAGED.
    
-10. Select 10 rows from table 
+10. Select any 10 rows from table 
     ```sql
     SELECT * FROM hive_metastore.default.nyc_yellow_taxi LIMIT 10;
     ```
@@ -152,20 +152,23 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     DELETE FROM hive_metastore.default.nyc_yellow_taxi_delta WHERE VendorID = 1;
     ```
 
-16. Insert more data into Delta table
+15. Insert more data into Delta table
     ```sql
     INSERT INTO hive_metastore.default.nyc_yellow_taxi_delta
     select * from hive_metastore.default.nyc_yellow_taxi WHERE VendorID = 1;
     ```
 
-17. Update records in Delta table
+16. Update records in Delta table
     ```sql
     UPDATE hive_metastore.default.nyc_yellow_taxi_delta
     SET tip_amount = 5
     where VendorID = 1 and DOLocationID = 7;
     ```
 
-19. Drop the table
+17. Use the Databricks Assistant to write a merge query to hive_metastore.default.nyc_yellow_taxi_delta from hive_metastore.default.nyc_yellow_taxi where vendorID = 1 and DOLocationID = 7
+    
+18. Drop the table
     ```sql
-    DROP TABLE hive_metastore.default.nyc_yellow_taxi;
+    DROP TABLE hive_metastore.default.nyc_yellow_taxi_test;
     ```
+
