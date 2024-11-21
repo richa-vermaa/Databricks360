@@ -172,3 +172,33 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     DROP TABLE hive_metastore.default.nyc_yellow_taxi_test;
     ```
 
+19. Use following query to determine Pickup Hour Distribution of Taxi rides 
+    ```sql
+    SELECT
+       HOUR(tpep_pickup_datetime) AS pickup_hour,
+       COUNT(1) AS number_of_rides
+   FROM
+       hive_metastore.default.nyc_yellow_taxi
+   GROUP BY
+       HOUR(tpep_pickup_datetime)
+   ORDER BY
+       pickup_hour;
+    ```
+
+20. Use following query to determine Monthly Total Fare Amounts 
+    ```sql
+    SELECT
+       YEAR(tpep_pickup_datetime) AS year,
+       MONTH(tpep_pickup_datetime) AS month,
+       SUM(ROUND(fare_amount,2)) AS total_fare
+   FROM
+       hive_metastore.default.nyc_yellow_taxi
+   GROUP BY
+        YEAR(tpep_pickup_datetime),
+        MONTH(tpep_pickup_datetime)
+   ORDER BY
+       year DESC, month DESC
+   LIMIT 5;
+   ```
+
+   NOTE: ROUND function might not work. Use assistant and ask to fix the rounding in the query.
