@@ -14,17 +14,22 @@ Please download the following files:
 1. Our first step is to add the January - April 2024 Yellow Taxi Trip Records files to the Databricks File Store (DBFS).  To do so, go to Catalog and click + (Add Data)  <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_05_add_data.jpeg)<BR>&nbsp;<BR>
 NOTE: For this lab we are using the DBFS for ease of use.  In most customer scenarios, you would upload the files to an external Volume within Unity Catalog. <BR>&nbsp;<BR>
+<br>
 
 2. On the Add Data screen select <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_06_add_data_upload.png)
+<br>
 
 3. Drag and drop the files into the Files section so that they are uploaded.  When finished, make sure to copy the file uploaded to paths so they can be used later.  <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_07_add_files.png)
+<br>
 
 4. You can exit the Add data screen by clicking on the SQL Editor in the left navigation menu.  
+<br>
 
 5. Next click + in the upper left to create a new query window. <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_08_add_query.png)
+<br>
 
 6. Create the table by copying the code below and running the query.
 
@@ -53,6 +58,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
         airport_fee DOUBLE 
     );
     ```
+<br>
 
 7. Click + again to create a new query window and run the query below.
 
@@ -61,8 +67,8 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     FROM (
     SELECT 
         CAST(VendorID AS BIGINT) AS VendorID,
-        CAST(tpep_pickup_datetime AS timestamp) as tpep_pickup_datetime,
-        CAST(tpep_dropoff_datetime AS timestamp) as tpep_dropoff_datetime,
+        CAST(tpep_pickup_datetime AS TIMESTAMP_NTZ) as tpep_pickup_datetime,
+        CAST(tpep_dropoff_datetime AS TIMESTAMP_NTZ) as tpep_dropoff_datetime,
         CAST(passenger_count AS DOUBLE) as passenger_count,
         trip_distance,
         CAST(RatecodeID as DOUBLE) as RatecodeID,
@@ -86,9 +92,41 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     COPY_OPTIONS ('mergeSchema' = 'true');
     ```
     NOTE:  This assumes all your .parquet files are in /FileStore/tables/ and you want to copy all of them. If you only want to copy the specified files, ensure they are the only .parquet files in the directory or adjust the path and pattern to specifically match the files you're interested in.
+<br>
 
-8. Use the following query to determine average trip time by weekday
+8. Create table without having to specify a schema. All files in the folder should have same schema for the table creation to be successful. 
+   ```sql
+    CREATE TABLE  hive_metastore.default.nyc_yellow_taxi_test
+    USING PARQUET
+    LOCATION '/FileStore/tables/';
+   ```
+   Run below command to validate the table properties.
+   ```sql
+    DESCRIBE EXTENDED hive_metastore.default.nyc_yellow_taxi_test;
+   ```
+   NOTE: Scroll through the properties to verify that the table type is EXTERNAL.
+<br>
+   
+9. Create a Delta table using table created in previous step to run data manipulation queries. 
+   ```sql
+    CREATE TABLE  hive_metastore.default.nyc_yellow_taxi_delta
+    USING DELTA
+    AS SELECT * FROM  hive_metastore.default.nyc_yellow_taxi;
+   ``` 
+   Run below command to validate the table properties.
+   ```sql
+    DESCRIBE EXTENDED hive_metastore.default.nyc_yellow_taxi_delta;
+   ```
+   NOTE: Scroll through the properties to verify that the table type is MANAGED.
+<br>
+   
+10. Select any 10 rows from table 
+    ```sql
+    SELECT * FROM hive_metastore.default.nyc_yellow_taxi LIMIT 10;
+    ```
+<br>
 
+11. Use the following query to determine average trip time by weekday
     ```sql
     SELECT 
     CASE 
@@ -114,7 +152,72 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     END
     ORDER BY weekday;
     ```
+<br>
 
-9. Use the Databricks Assistant to change the above query to avg distance by weekday. 
+12. Use the Databricks Assistant to change the above query to avg distance by weekday. 
+<br>
 
-10. Use the Databricks Assistant to change the above query to avg tip amount by weekday. 
+13. Use the Databricks Assistant to change the above query to avg tip amount by weekday. 
+<br>
+
+14. Delete records from Delta table
+    ```sql
+    DELETE FROM hive_metastore.default.nyc_yellow_taxi_delta WHERE VendorID = 1;
+    ```
+<br>
+
+15. Insert more data into Delta table
+    ```sql
+    INSERT INTO hive_metastore.default.nyc_yellow_taxi_delta
+    select * from hive_metastore.default.nyc_yellow_taxi WHERE VendorID = 1;
+    ```
+<br>
+
+16. Update records in Delta table
+    ```sql
+    UPDATE hive_metastore.default.nyc_yellow_taxi_delta
+    SET tip_amount = 5
+    where VendorID = 1 and DOLocationID = 7;
+    ```
+<br>
+
+17. Use the Databricks Assistant to write a merge query to hive_metastore.default.nyc_yellow_taxi_delta from hive_metastore.default.nyc_yellow_taxi where vendorID = 1 and DOLocationID = 7
+<br>
+    
+18. Drop the table
+    ```sql
+    DROP TABLE hive_metastore.default.nyc_yellow_taxi_test;
+    ```
+<br>
+
+19. Use following query to determine Pickup Hour Distribution of Taxi rides 
+    ```sql
+    SELECT
+       HOUR(tpep_pickup_datetime) AS pickup_hour,
+       COUNT(1) AS number_of_rides
+    FROM
+       hive_metastore.default.nyc_yellow_taxi
+    GROUP BY
+       HOUR(tpep_pickup_datetime)
+    ORDER BY
+       pickup_hour;
+    ```
+<br>
+
+20. Use following query to determine Monthly Total Fare Amounts 
+    ```sql
+    SELECT
+       YEAR(tpep_pickup_datetime) AS year,
+       MONTH(tpep_pickup_datetime) AS month,
+       SUM(ROUND(fare_amount,2)) AS total_fare
+    FROM
+       hive_metastore.default.nyc_yellow_taxi
+    GROUP BY
+        YEAR(tpep_pickup_datetime),
+        MONTH(tpep_pickup_datetime)
+    ORDER BY
+       year DESC, month DESC
+    LIMIT 5;
+    ```
+
+   NOTE: ROUND function might not work. Use assistant and ask to fix the rounding in the query.
