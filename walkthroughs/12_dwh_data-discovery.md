@@ -31,7 +31,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
 ![picture alt](/imagery/dwh_08_add_query.png)
 <br>
 
-6. Create the table by copying the code below and running the query.
+6. Create the table manually by copying the code below and running the query.
 
     ```sql
     DROP TABLE IF EXISTS  hive_metastore.default.nyc_yellow_taxi;
@@ -60,7 +60,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     ```
 <br>
 
-7. Click + again to create a new query window and run the query below.
+7. Click + again to create a new query window and run the query below to manually populate the table.
 
     ```sql
     COPY INTO hive_metastore.default.nyc_yellow_taxi
@@ -96,18 +96,24 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
 
 8. Create table without having to specify a schema. All files in the folder should have same schema for the table creation to be successful. 
    ```sql
-    CREATE TABLE  hive_metastore.default.nyc_yellow_taxi_test
+    CREATE TABLE  hive_metastore.default.nyc_yellow_taxi_auto
     USING PARQUET
     LOCATION '/FileStore/tables/';
    ```
    Run below command to validate the table properties.
    ```sql
-    DESCRIBE EXTENDED hive_metastore.default.nyc_yellow_taxi_test;
+    DESCRIBE EXTENDED hive_metastore.default.nyc_yellow_taxi_auto;
    ```
    NOTE: Scroll through the properties to verify that the table type is EXTERNAL.
 <br>
+
+9. Drop the table created in the previous step
+    ```sql
+    DROP TABLE hive_metastore.default.nyc_yellow_taxi_auto;
+    ```
+<br>
    
-9. Create a Delta table using table created in previous step to run data manipulation queries. 
+10. Create a Delta table using table created in steps 6 & 7 to run data manipulation queries. 
    ```sql
     CREATE TABLE  hive_metastore.default.nyc_yellow_taxi_delta
     USING DELTA
@@ -120,13 +126,13 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
    NOTE: Scroll through the properties to verify that the table type is MANAGED.
 <br>
    
-10. Select any 10 rows from table 
+11. Select any 10 rows from table 
     ```sql
-    SELECT * FROM hive_metastore.default.nyc_yellow_taxi LIMIT 10;
+    SELECT * FROM hive_metastore.default.nyc_yellow_taxi_delta LIMIT 10;
     ```
 <br>
 
-11. Use the following query to determine average trip time by weekday
+12. Use the following query to determine average trip time by weekday
     ```sql
     SELECT 
     CASE 
@@ -139,7 +145,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
         WHEN dayofweek(tpep_pickup_datetime) = 7 THEN 'Saturday'
     END AS weekday,
     AVG(unix_timestamp(tpep_dropoff_datetime) - unix_timestamp(tpep_pickup_datetime)) / 60 AS avg_trip_time_minutes
-    FROM hive_metastore.default.nyc_yellow_taxi
+    FROM hive_metastore.default.nyc_yellow_taxi_delta
     GROUP BY 
     CASE 
         WHEN dayofweek(tpep_pickup_datetime) = 1 THEN 'Sunday'
@@ -154,40 +160,35 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
     ```
 <br>
 
-12. Use the Databricks Assistant to change the above query to avg distance by weekday. 
+13. Use the Databricks Assistant to change the above query to avg distance by weekday. 
 <br>
 
-13. Use the Databricks Assistant to change the above query to avg tip amount by weekday. 
+14. Use the Databricks Assistant to change the above query to avg tip amount by weekday. 
 <br>
 
-14. Delete records from Delta table
+15. Delete records from Delta table
     ```sql
     DELETE FROM hive_metastore.default.nyc_yellow_taxi_delta WHERE VendorID = 1;
     ```
 <br>
 
-15. Insert more data into Delta table
+16. Insert more data into Delta table
     ```sql
     INSERT INTO hive_metastore.default.nyc_yellow_taxi_delta
     select * from hive_metastore.default.nyc_yellow_taxi WHERE VendorID = 1;
     ```
 <br>
 
-16. Update records in Delta table
+17. Update records in Delta table
     ```sql
     UPDATE hive_metastore.default.nyc_yellow_taxi_delta
-    SET tip_amount = 5
+    SET tip_amount = (total_amount * .2)
     where VendorID = 1 and DOLocationID = 7;
     ```
 <br>
 
-17. Use the Databricks Assistant to write a merge query to hive_metastore.default.nyc_yellow_taxi_delta from hive_metastore.default.nyc_yellow_taxi where vendorID = 1 and DOLocationID = 7
-<br>
-    
-18. Drop the table
-    ```sql
-    DROP TABLE hive_metastore.default.nyc_yellow_taxi_test;
-    ```
+18. Use the Databricks Assistant to write a merge query to hive_metastore.default.nyc_yellow_taxi_delta from hive_metastore.default.nyc_yellow_taxi where vendorID = 1 and DOLocationID = 7.<BR>
+NOTE: You may need to add a few conditions to your ON statement.  REview the data to determine what fields are needed to determine a unique row.
 <br>
 
 19. Use following query to determine Pickup Hour Distribution of Taxi rides 
@@ -196,7 +197,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
        HOUR(tpep_pickup_datetime) AS pickup_hour,
        COUNT(1) AS number_of_rides
     FROM
-       hive_metastore.default.nyc_yellow_taxi
+       hive_metastore.default.nyc_yellow_taxi_delta
     GROUP BY
        HOUR(tpep_pickup_datetime)
     ORDER BY
@@ -211,7 +212,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
        MONTH(tpep_pickup_datetime) AS month,
        SUM(ROUND(fare_amount,2)) AS total_fare
     FROM
-       hive_metastore.default.nyc_yellow_taxi
+       hive_metastore.default.nyc_yellow_taxi_delta
     GROUP BY
         YEAR(tpep_pickup_datetime),
         MONTH(tpep_pickup_datetime)
