@@ -96,18 +96,24 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
 
 8. Create table without having to specify a schema. All files in the folder should have same schema for the table creation to be successful. 
    ```sql
-    CREATE TABLE  hive_metastore.default.nyc_yellow_taxi_test
+    CREATE TABLE  hive_metastore.default.nyc_yellow_taxi_same
     USING PARQUET
     LOCATION '/FileStore/tables/';
    ```
    Run below command to validate the table properties.
    ```sql
-    DESCRIBE EXTENDED hive_metastore.default.nyc_yellow_taxi_test;
+    DESCRIBE EXTENDED hive_metastore.default.nyc_yellow_taxi_same;
    ```
    NOTE: Scroll through the properties to verify that the table type is EXTERNAL.
 <br>
+
+9. Drop the table created in the previous step
+    ```sql
+    DROP TABLE hive_metastore.default.nyc_yellow_taxi_same;
+    ```
+<br>
    
-9. Create a Delta table using table created in previous step to run data manipulation queries. 
+10. Create a Delta table using table created in previous step to run data manipulation queries. 
    ```sql
     CREATE TABLE  hive_metastore.default.nyc_yellow_taxi_delta
     USING DELTA
@@ -184,11 +190,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
 17. Use the Databricks Assistant to write a merge query to hive_metastore.default.nyc_yellow_taxi_delta from hive_metastore.default.nyc_yellow_taxi where vendorID = 1 and DOLocationID = 7
 <br>
     
-18. Drop the table
-    ```sql
-    DROP TABLE hive_metastore.default.nyc_yellow_taxi_test;
-    ```
-<br>
+
 
 19. Use following query to determine Pickup Hour Distribution of Taxi rides 
     ```sql
