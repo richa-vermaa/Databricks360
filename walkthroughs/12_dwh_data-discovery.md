@@ -182,15 +182,14 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
 17. Update records in Delta table
     ```sql
     UPDATE hive_metastore.default.nyc_yellow_taxi_delta
-    SET tip_amount = 5
+    SET tip_amount = (total_amount * .2)
     where VendorID = 1 and DOLocationID = 7;
     ```
 <br>
 
-18. Use the Databricks Assistant to write a merge query to hive_metastore.default.nyc_yellow_taxi_delta from hive_metastore.default.nyc_yellow_taxi where vendorID = 1 and DOLocationID = 7
+18. Use the Databricks Assistant to write a merge query to hive_metastore.default.nyc_yellow_taxi_delta from hive_metastore.default.nyc_yellow_taxi where vendorID = 1 and DOLocationID = 7.<BR>
+NOTE: You may need to add a few conditions to your ON statement.  REview the data to determine what fields are needed to determine a unique row.
 <br>
-    
-
 
 19. Use following query to determine Pickup Hour Distribution of Taxi rides 
     ```sql
@@ -198,7 +197,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
        HOUR(tpep_pickup_datetime) AS pickup_hour,
        COUNT(1) AS number_of_rides
     FROM
-       hive_metastore.default.nyc_yellow_taxi
+       hive_metastore.default.nyc_yellow_taxi_delta
     GROUP BY
        HOUR(tpep_pickup_datetime)
     ORDER BY
@@ -213,7 +212,7 @@ NOTE: For this lab we are using the DBFS for ease of use.  In most customer scen
        MONTH(tpep_pickup_datetime) AS month,
        SUM(ROUND(fare_amount,2)) AS total_fare
     FROM
-       hive_metastore.default.nyc_yellow_taxi
+       hive_metastore.default.nyc_yellow_taxi_delta
     GROUP BY
         YEAR(tpep_pickup_datetime),
         MONTH(tpep_pickup_datetime)
