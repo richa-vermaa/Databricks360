@@ -101,9 +101,11 @@ NOTE: By default, your new dashboard is automatically named with its creation ti
 
 10. Use the filter to identify differences/ between week days and weekend days.
 
-11. Go to the Data tab and ask the Databricks assistant to add Month to your dataset by utilizing the following statement 'Add Month to the NYC Taxi Summarized data set'
+11. Go to the Data tab and ask the Databricks assistant to add Month to your dataset by utilizing the following statement 'Add Month to the NYC Taxi Summarized data set'.  
 
-12. Go to the Canvas tab and on the Bar chart, perform the following actions:<BR>
+12. Update your dataset with the Databricks assistant output. 
+
+13. Go to the Canvas tab and on the Bar chart, perform the following actions:<BR>
     a. Change the x axis value to 'month'.<BR>
     b. Filter the Dataset to only January, February, March and April.
     <BR>&nbsp;<BR>
@@ -112,7 +114,12 @@ NOTE: By default, your new dashboard is automatically named with its creation ti
     ![picture alt](/imagery/dwh_14_07_barchart.png)
     <br>
 
-13. Rename the canvas page to 'Summary'
+14. Rename the canvas page to 'Summary'
 
-14.  Last of all, click 'Publish' to publish and share your Dashboard.
+15. Last of all, click 'Publish' to publish and share your Dashboard.  On the Publish NYC Taxi Cab Analysis page, Enable Genie on the bottom and click Publish.
 
+    <BR>&nbsp;<BR>
+    ![picture alt](/imagery/dwh_14_08_publish.png)
+    <br>
+
+16.  You have 2 refresh options, you can refresh it manually or via the Schedule button.  Both options are available in the upper right of the dashboard.  Check out both to see all the options available.  For more on this topic check out [Manage scheduled dashboard updates and subscriptions](https://learn.microsoft.com/en-us/azure/databricks/dashboards/schedule-subscribe)
