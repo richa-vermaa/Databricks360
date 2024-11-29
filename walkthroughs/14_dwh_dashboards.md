@@ -116,7 +116,7 @@ NOTE: By default, your new dashboard is automatically named with its creation ti
 
 14. Rename the canvas page to 'Summary'
 
-15. Last of all, click 'Publish' to publish and share your Dashboard.  On the Publish NYC Taxi Cab Analysis page, Enable Genie on the bottom and click Publish.<BR>
+15. Last of all, click 'Publish' to publish and share your Dashboard.  On the Publish NYC Taxi Cab Analysis page, Enable Genie on the bottom and click Publish.<BR>&nbsp;<BR>
     ![picture alt](/imagery/dwh_14_08_publish.png)
     <br>
 
