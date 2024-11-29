@@ -8,7 +8,7 @@ For this exercise, we will expand on the scope of the queries we did in the Data
 * Tip Percentage
 
 1. To create a Dashboard, go to 'Dashboards' item in the left navigation bar and then click the Create Dashboard button in the upper right.<BR>
-NOTE: By default, your new dashboard is automatically named with its creation timestamp and stored in your /Workspace/Users/<username> directory
+NOTE: By default, your new dashboard is automatically named with its creation timestamp and stored in your /Workspace/Users/<username> directory.
 
 2. Click on the Dashboard title in the top center and rename your dashboard to 'NYC Taxi Cab Analysis'.  When finished, your screen should look like the following.
 <BR>&nbsp;<BR>
@@ -47,7 +47,7 @@ NOTE: By default, your new dashboard is automatically named with its creation ti
         day_of_week, time_of_day
     ```
 
-4. Name your dataset 'NYC Taxi Summarized'.  WHen finished, your Dataset should look like the following:
+4. Name your dataset 'NYC Taxi Summarized'.  When finished, your dataset should look like the following:
 <BR>&nbsp;<BR>
 ![picture alt](/imagery/dwh_14_02_dataset.png)
 <br>
@@ -66,7 +66,7 @@ NOTE: By default, your new dashboard is automatically named with its creation ti
     &nbsp;&nbsp;&nbsp;&nbsp;iii. AVG(avg_tip_percentage)<BR>
     &nbsp;&nbsp;&nbsp;&nbsp;iv. AVG(avg_trip_distance)<BR>
     &nbsp;&nbsp;&nbsp;&nbsp;v. AVG(avg_trip_time_minutes)<BR>
-    NOTE:  THe values will first show as SUM(field), click on the value field to change it to AVG.
+    NOTE:  The values will first show as SUM(field), click on each SUM(field) to change it to AVG.
     <BR>&nbsp;<BR>
     When finished, your visual should look like the following: 
     <BR>&nbsp;<BR>
@@ -88,11 +88,11 @@ NOTE: By default, your new dashboard is automatically named with its creation ti
     ![picture alt](/imagery/dwh_14_05_line.png)
     <br>
 
-8. Lets add a bar chart via the Databricks Assistant.  Click 'Add a visualization' and add it to the lower right section of the canvas and ask the following of the databricks assistant 'Create a bar chart by avg trip distance by avg tip percentage' and click Preview.  When finished, click 'Accept'.
+8. Lets add a bar chart via the Databricks Assistant.  Click 'Add a visualization' and add it to the lower right section of the canvas and ask the following of the Databricks Assistant; 'Create a bar chart by avg trip distance by avg tip percentage' and click Preview.  When finished, click 'Accept'.
 
 9. Lets Add a filter based on Weekday, click 'Add a filter' and position it above the pivot table and set the following values.<BR>
     a. Filter: Multiple Values<BR>
-    b. Fields: day_of_week<BR>
+    b. Fields: day_of_week
     <BR>&nbsp;<BR>
     When finished, your visual should look like the following: 
     <BR>&nbsp;<BR>
@@ -103,7 +103,7 @@ NOTE: By default, your new dashboard is automatically named with its creation ti
 
 11. Go to the Data tab and ask the Databricks assistant to add Month to your dataset by utilizing the following statement 'Add Month to the NYC Taxi Summarized data set'.  
 
-12. Update your dataset with the Databricks assistant output. 
+12. Update your dataset with the Databricks Assistant output. 
 
 13. Go to the Canvas tab and on the Bar chart, perform the following actions:<BR>
     a. Change the x axis value to 'month'.<BR>
@@ -116,10 +116,9 @@ NOTE: By default, your new dashboard is automatically named with its creation ti
 
 14. Rename the canvas page to 'Summary'
 
-15. Last of all, click 'Publish' to publish and share your Dashboard.  On the Publish NYC Taxi Cab Analysis page, Enable Genie on the bottom and click Publish.
-
-    <BR>&nbsp;<BR>
+15. Last of all, click 'Publish' to publish and share your Dashboard.  On the Publish NYC Taxi Cab Analysis page, Enable Genie on the bottom and click Publish.<BR>&nbsp;<BR>
     ![picture alt](/imagery/dwh_14_08_publish.png)
     <br>
 
-16.  You have 2 refresh options, you can refresh it manually or via the Schedule button.  Both options are available in the upper right of the dashboard.  Check out both to see all the options available.  For more on this topic check out [Manage scheduled dashboard updates and subscriptions](https://learn.microsoft.com/en-us/azure/databricks/dashboards/schedule-subscribe)
+16.  You have 2 refresh options, you can refresh it manually or via the Schedule button.  Both are available in the upper right of the dashboard.  Check out both to see all the options available.<BR>
+For more on this topic check out [Manage scheduled dashboard updates and subscriptions](https://learn.microsoft.com/en-us/azure/databricks/dashboards/schedule-subscribe)
