@@ -122,3 +122,12 @@ NOTE: By default, your new dashboard is automatically named with its creation ti
 
 16.  You have 2 refresh options, you can refresh it manually or via the Schedule button.  Both are available in the upper right of the dashboard.  Check out both to see all the options available.<BR>
 For more on this topic check out [Manage scheduled dashboard updates and subscriptions](https://learn.microsoft.com/en-us/azure/databricks/dashboards/schedule-subscribe)
+
+<br>
+
+## Cost and Usage Dashboard powered by AI/BI
+To understand your Databricks costs and identify expensive workloads, Databricks launched a new [Cost and Usage dashboard, powered by AI/BI](https://docs.databricks.com/en/admin/account-settings/usage.html). With the dashboard, you can see the context of your spending and understand which project your costs are originating from. Finally, you can find your most expensive jobs, clusters, and endpoints.  
+
+To use the dashboard, set them up in the Account Console. You own and manage the dashboards, so customize them to fit your business. 
+
+
