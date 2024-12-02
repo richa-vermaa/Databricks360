@@ -1,3 +1,4 @@
+# Query Management in Databricks
 
 This exercise is run after [Data Discovery](/walkthroughs/12_dwh_data-discovery.md) and explains how to manage SQL Queries inside Databricks.
 
