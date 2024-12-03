@@ -52,6 +52,8 @@ Because of the nature of our data, we are going to setup a notification if the a
 <BR>
 
 ## Step 3 - Schedule the SQL Alert
+We will now modify our query so it will evaluate the previous day's records and schedule it to run daily.
+
 
 
 For more on this topic check out [What are Databricks SQL Alerts](https://learn.microsoft.com/en-us/azure/databricks/sql/user/alerts/)
