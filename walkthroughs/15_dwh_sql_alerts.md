@@ -2,7 +2,7 @@
 
 Databricks SQL Alerts enable the execution of SQL queries, the evaluation of specified conditions, and the dispatch of notifications when those conditions are satisfied.
 
-For this exercise, we will create a SQL Query and create an alert to evaluate conditions. We will also setup a schedule for our alert to be evaluated and send notifications.
+For this exercise, we will create a SQL Query and an alert to evaluate conditions. We will also setup a schedule for our alert to be evaluated and send notifications when our criteria is met.
 
 Because of the nature of our data, we are going to setup a notification if the average tip amount for a day is less then 17%.  We will hard code a date to see that our query gets triggered.  Then we will modify it for the schedule.
 
@@ -38,9 +38,9 @@ Because of the nature of our data, we are going to setup a notification if the a
     ![picture alt](/imagery/dwh_15_02_trigger_conditions.png)
     <BR>
 
-7. Under Notifications, set the following values:
-    a. Send notification = each time alert is evaluated.
-    b. Check the Send notification box
+7. Under Notifications, set the following values:<BR>
+    a. Send notification = each time alert is evaluated.<BR>
+    b. Check the Send notification box<BR>
 
 8. Leave 'Use default template' selected under Template.
 
@@ -49,38 +49,44 @@ Because of the nature of our data, we are going to setup a notification if the a
     ![picture alt](/imagery/dwh_15_03_save.png)
     <BR>
 
+10.  Back at the Tips under 17% summary window, click the 'Refresh' button in the top right to manually execute the alert.  When finished, your alert should have 'TRIGGERED' under the title.
+    <BR> &nbsp;<BR>
+    ![picture alt](/imagery/dwh_15_08_refresh.png)
+    <BR>
+
 <BR>
 
 ## Step 3 - Schedule the SQL Alert
 We will now modify our query so it will evaluate the previous day's records and schedule it to run daily.
 
-10.  Click on 'Queries' in the left navigation bar and select the 'SQL Alert query' and ask the Databricks Assistant to 'change the where clause to yesterday'.  Accept the results and save the query.  <BR>
+11.  Click on 'Queries' in the left navigation bar and select the 'SQL Alert query' and ask the Databricks Assistant to 'change the where clause to today minus one day'.  Accept the results and save the query.  <BR>
     NOTE: This query will not return any rows as we only have data for the first four months of 2024.  However, this showcases the dynamic query needed to run on a daily basis.
 
-11. Click on 'Alerts' in the left navigation bar and select the 'Tips under 17%' alert.
+12. Click on 'Alerts' in the left navigation bar and select the 'Tips under 17%' alert.
 
-12. In the 'Tips under 17%' window, click Add schedule in the middle right.
+13. In the 'Tips under 17%' window, click Add schedule in the middle right.
 
-13. In the the settings tab of the Add schedule window, set it is Every Day at 05:00.  Set the Timezone to your Timezone.  When finished, you screen should look like the screenshot below. 
+14. In the the settings tab of the Add schedule window, set it is Every Day at 05:00.  Set the Timezone to your Timezone.  When finished, you screen should look like the screenshot below. 
     <BR> &nbsp;<BR>
     ![picture alt](/imagery/dwh_15_04_add_schedule.png)
     <BR>
-14. In the Destinations tab, add yourself to the destinations and click 'Create'
+15. In the Destinations tab, add yourself to the Destination listing and click 'Create'
 
-15.  When finished, your schedule is added to the Alert and should look like the screenshot below.
+16.  When finished, your schedule is added to the Alert and should look like the screenshot below.
     <BR> &nbsp;<BR>
     ![picture alt](/imagery/dwh_15_05_alert.png)
     <BR>
 
-16.  To test you schedule, click the 'arrow/Run one' to run the schedule.
+17.  To test you schedule, click the 'arrow/Run one' to run the schedule.
     <BR> &nbsp;<BR>
     ![picture alt](/imagery/dwh_15_06_run.png)
     <BR>
     
-17. To see the result of your schedule, you may need to refresh your screen or click on another item in the left navigation bar and the click back on 'Alerts' in the left navigation bar and select the 'Tips under 17%' alert.  Your schedule section should look like the screen shot below.
+18. To see the result of your schedule, you may need to refresh your screen or click on another item in the left navigation bar and the click back on 'Alerts' in the left navigation bar and select the 'Tips under 17%' alert.  Your schedule section should look like the screen shot below.
     <BR> &nbsp;<BR>
     ![picture alt](/imagery/dwh_15_07_schedule.png)
     <BR>
+    NOTE: The criteria was not met when the schedule was executed, so no notification is sent as there is no data for yesterday.
 
 <B>You have now completed this walkthrough.</b>  
 
