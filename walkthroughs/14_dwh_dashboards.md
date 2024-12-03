@@ -1,4 +1,6 @@
-# Dashboards 
+# SQL Dashboards 
+
+Dashboards can be utilized to construct data visualizations and disseminate reports within your team. AI/BI dashboards offer AI-assisted authoring, an advanced visualization library, and an optimized configuration experience, enabling rapid transformation of data into shareable insights.
 
 For this exercise, we will expand on the scope of the queries we did in the Data Discovery lab to build our dashboards to visualize the following fields in the 'nyc_yellow_taxi_delta' table.
 * Passenger Count
