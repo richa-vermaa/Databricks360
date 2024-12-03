@@ -77,7 +77,7 @@ We will now modify our query so it will evaluate the previous day's records and 
     ![picture alt](/imagery/dwh_15_05_alert.png)
     <BR>
 
-17.  To test you schedule, click the 'arrow/Run one' to run the schedule.
+17.  To test you schedule, click the 'arrow/Run once' to execute the schedule.
     <BR> &nbsp;<BR>
     ![picture alt](/imagery/dwh_15_06_run.png)
     <BR>
@@ -86,7 +86,7 @@ We will now modify our query so it will evaluate the previous day's records and 
     <BR> &nbsp;<BR>
     ![picture alt](/imagery/dwh_15_07_schedule.png)
     <BR>
-    NOTE: The criteria was not met when the schedule was executed, so no notification is sent as there is no data for yesterday.
+    NOTE: No notification was sent because the criteria was not met as there was no data for yesterday.
 
 <B>You have now completed this walkthrough.</b>  
 
