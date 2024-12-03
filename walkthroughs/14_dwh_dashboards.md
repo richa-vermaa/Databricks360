@@ -123,4 +123,7 @@ NOTE: By default, your new dashboard is automatically named with its creation ti
     <br>
 
 16.  You have 2 refresh options, you can refresh it manually or via the Schedule button.  Both are available in the upper right of the dashboard.  Check out both to see all the options available.<BR>
+
+<B>You have now completed this walkthrough.</b>  
+
 For more on this topic check out [Manage scheduled dashboard updates and subscriptions](https://learn.microsoft.com/en-us/azure/databricks/dashboards/schedule-subscribe)
