@@ -66,7 +66,7 @@ A query filter lets you interactively reduce the amount of data shown in a visua
     <img src="/imagery/dwh_query_filters.jpeg" alt="Query Filters" width="1000" height="auto">
 
 Click on 'Add Filters' to add more filters to your data.
-    <img src="/imagery/dwh_query_filter_multiple.jpeg.jpeg" alt="Multiple Filters" width="1000" height="auto">
+    <img src="/imagery/dwh_query_filter_multiple.jpeg" alt="Multiple Filters" width="1000" height="auto">
 
 While previous query filters operated client-side only, these updated filters work dynamically on either client- or server-side to optimize performance.
 
