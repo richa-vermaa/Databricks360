@@ -123,20 +123,16 @@ Caching provides numerous advantages in data warehouses, including:
 * **Reduced cluster usage**: Caching minimizes the need for additional compute resources by reusing previously computed results. This reduces the overall warehouse uptime and the demand for additional compute clusters, leading to cost savings and better resource allocation.
 
 #### Types of Query Caches in Databricks SQL
-1. **Databricks SQL UI cache**: Per user caching of all query and dashboard results in the Databricks SQL UI. When users first open a dashboard or SQL query, the Databricks SQL UI cache displays the most recent query result, including the results from scheduled executions.
-
+1. **Databricks SQL UI cache**: Per user caching of all query and dashboard results in the Databricks SQL UI. When users first open a dashboard or SQL query, the Databricks SQL UI cache displays the most recent query result, including the results from scheduled executions.<BR>&nbsp;<BR>
 The Databricks SQL UI cache has at most a 7-day life cycle. The cache is located within your Azure Databricks filesystem in your account. You can delete query results by re-running the query that you no longer want to be stored. Once re-run, the old query results are removed from cache. Additionally, the cache is invalidated once the underlying tables have been updated.
 
 2. **Result cache**: Per cluster caching of query results for all queries through SQL warehouses. Result caching includes both local and remote result caches, which work together to improve query performance by storing query results in memory or remote storage mediums.
 
     1. *Local cache*: The local cache is an in-memory cache that stores query results for the cluster’s lifetime or until the cache is full, whichever comes first. This cache is useful for speeding up repetitive queries, eliminating the need to recompute the same results. However, once the cluster is stopped or restarted, the cache is cleaned and all query results are removed.
-    2. *Remote result cache*: The remote result cache is a serverless-only cache system that retains query results by persisting them as workspace system data. As a result, this cache is not invalidated by the stopping or restarting of a SQL warehouse. Remote result cache addresses a common pain point in caching query results in-memory, which only remains available as long as the compute resources are running. The remote cache is a persistent shared cache across all warehouses in a Databricks workspace.
-   
-Accessing the remote result cache requires a running warehouse. When processing a query, a cluster first looks in its local cache and then looks in the remote result cache if necessary. Only if the query result isn’t cached in either cache is the query executed. Both the local and the remote caches have a life cycle of 24 hours, which starts at cache entry. The remote result cache persists through the stopping or restarting of a SQL warehouse. Both caches are invalidated when the underlying tables are updated.
-
-Remote result cache is available for queries using ODBC / JDBC clients and SQL Statement API.
-
-To disable query result caching, you can run SET use_cached_result = false in the SQL editor.
+    2. *Remote result cache*: The remote result cache is a serverless-only cache system that retains query results by persisting them as workspace system data. As a result, this cache is not invalidated by the stopping or restarting of a SQL warehouse. Remote result cache addresses a common pain point in caching query results in-memory, which only remains available as long as the compute resources are running. The remote cache is a persistent shared cache across all warehouses in a Databricks workspace.<BR>&nbsp;<BR>
+Accessing the remote result cache requires a running warehouse. When processing a query, a cluster first looks in its local cache and then looks in the remote result cache if necessary. Only if the query result isn’t cached in either cache is the query executed. Both the local and the remote caches have a life cycle of 24 hours, which starts at cache entry. The remote result cache persists through the stopping or restarting of a SQL warehouse. Both caches are invalidated when the underlying tables are updated.<BR>&nbsp;<BR>   
+Remote result cache is available for queries using ODBC / JDBC clients and SQL Statement API.<BR>&nbsp;<BR>
+To disable query result caching, you can run SET use_cached_result = false in the SQL editor.<BR>
 
 3. **Disk cache**: Local SSD caching for data read from data storage for queries through SQL warehouses. The disk cache is designed to enhance query performance by storing data on disk, allowing for accelerated data reads. Data is automatically cached when files are fetched, utilizing a fast intermediate format. By storing copies of the files on the local storage attached to compute nodes, the disk cache ensures the data is located closer to the workers, resulting in improved query performance. See Optimize performance with caching on Azure Databricks.
 
@@ -146,7 +142,7 @@ To disable query result caching, you can run SET use_cached_result = false in th
 Primary key constraints, which capture relationships between fields in tables, can help users and tools understand relationships in your data. You can use primary keys with the RELY option to optimize some common types of queries.
 
 ##### Create table with Primary Key constraint 
-```
+```sql
 CREATE TABLE customer (
   c_customer_sk int,
   PRIMARY KEY (c_customer_sk)
@@ -159,7 +155,7 @@ When you know that a primary key constraint is valid, you can enable optimizatio
 
 The RELY option allows Azure Databricks to exploit the constraint to rewrite queries. The following optimizations can only be performed if the RELY option is specified in an ADD CONSTRAINT clause or ALTER TABLE statement.
 
-```
+```sql
 ALTER TABLE
   customer DROP PRIMARY KEY;
 ALTER TABLE
