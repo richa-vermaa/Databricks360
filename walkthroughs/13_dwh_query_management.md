@@ -51,7 +51,7 @@ To view Query profile,
 1. Go to Query History
 2. Click on the name of query and a query details panel appears on the right side of the screen
     <img src="/imagery/dwh_query_profile.jpeg" alt="Query Profile" width="1000" height="auto">
-3. Click on Query Profile to view the execution details such as 
+3. Click on 'See query profile' to view the execution details such as 
     * Time spent: Aggregated time spent for each operation. The task’s total time is also provided.
     * Rows: The number and size of the rows affected by each of the query’s operators.
     * Peak memory: The peak memory each of the query’s operators consumed.
@@ -119,8 +119,8 @@ Caching is an essential technique for improving the performance of data warehous
 
 Caching provides numerous advantages in data warehouses, including:
 
-**Speed**: By storing query results or frequently accessed data in memory or other fast storage mediums, caching can dramatically reduce query execution times. This storage is particularly beneficial for repetitive queries, as the system can quickly retrieve the cached results instead of recomputing them.
-**Reduced cluster usage**: Caching minimizes the need for additional compute resources by reusing previously computed results. This reduces the overall warehouse uptime and the demand for additional compute clusters, leading to cost savings and better resource allocation.
+* **Speed**: By storing query results or frequently accessed data in memory or other fast storage mediums, caching can dramatically reduce query execution times. This storage is particularly beneficial for repetitive queries, as the system can quickly retrieve the cached results instead of recomputing them.<BR>
+* **Reduced cluster usage**: Caching minimizes the need for additional compute resources by reusing previously computed results. This reduces the overall warehouse uptime and the demand for additional compute clusters, leading to cost savings and better resource allocation.
 
 #### Types of Query Caches in Databricks SQL
 1. **Databricks SQL UI cache**: Per user caching of all query and dashboard results in the Databricks SQL UI. When users first open a dashboard or SQL query, the Databricks SQL UI cache displays the most recent query result, including the results from scheduled executions.
