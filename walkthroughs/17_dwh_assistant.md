@@ -1,8 +1,12 @@
 # Assistant in Databricks
 
-DatabricksIQ is a context-aware AI assistant that can help you with Databricks notebooks, SQL editor, jobs, AI/BI dashboards, and file editor. Databricks Assistant assists you with data and code when you ask for help using a conversational interface. This feature is enabled by default. However, account admins can disable Azure AI-powered Assistant features for all workspaces within an account. 
+DatabricksIQ is a context-aware AI assistant that can help you with Databricks notebooks, SQL editor, jobs, AI/BI dashboards, and file editor.<BR> 
+It assists you with data and code when you ask for help using a conversational interface. This feature is enabled by default. However, account admins can disable Azure AI-powered Assistant features for all workspaces within an account. 
 
-For Account admind, login in the [account console](https://accounts.azuredatabricks.net/)
+To review these settings you must be an Account Admin.  
+
+Next, login in the [Account Console](https://accounts.azuredatabricks.net/)
+
 Click Settings -> Feature enablement -> Enable Azure AI-powered features option, select Off or On.
 
 <img src="/imagery/dwh_enable_ai_assistant.jpeg" alt="Enable AI Assistant" width="1000" height="auto">
@@ -10,6 +14,7 @@ Click Settings -> Feature enablement -> Enable Azure AI-powered features option,
 
 ## Open AI Assistant
 To open the Assistant pane, click the highlighted icon in the top right corner.
+
 <img src="/imagery/dwh_open_assistant.jpeg" alt="Open AI Assistant" width="1000" height="auto">
 
 
