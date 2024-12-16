@@ -1,4 +1,27 @@
-# Serverless SQL and Security in Databricks
+# Serverless SQL in Databricks
+
+Serverless SQL warehouses in Databricks are designed to provide on-demand, scalable compute resources for running SQL queries without the need to manage infrastructure. Here are some key points to understand:
+
+## What is Serverless Compute?
+Serverless compute allows you to run workloads without provisioning a cluster. Instead, Databricks automatically allocates and manages the necessary compute resources. This enables you to focus on writing code and analysing data without worrying about cluster management or resource utilisation1.
+
+
+## Benefits of Serverless SQL Warehouses
+
+**Instant Compute:** Rapid start-up and scaling times for serverless compute resources minimise idle time and ensure you only pay for the compute you use1.
+**Managed Resources:** Cloud resources are managed by Databricks, reducing management overhead and providing instant compute to enhance user productivity1.
+**Security and Reliability: **Capacity handling, security, patching, and upgrades are managed automatically, so you can worry less about reliability, security policies, and capacity shortages1.
+**How Serverless SQL Warehouses Work:** Serverless SQL warehouses use private connectivity between the Databricks control plane and the serverless compute plane in nearly all cases. This ensures secure and efficient data processing2.
+
+
+## Use Cases:
+**Interactive Queries:** Ideal for running SQL commands on data objects in the SQL editor or interactive notebooks1.
+**Batch Processing:** Suitable for batch processing tasks where you need to run large volumes of data efficiently1.
+**Enabling Serverless SQL Warehouses:** Serverless SQL warehouses are enabled by default in Databricks. However, you may need to check that your workspace meets the necessary requirements and make any required changes.
+
+<br>
+
+# Security in Databricks
 
 ## SQL Warehouse Settings and Access Controls
 
@@ -10,7 +33,6 @@ Workspace administrators can configure the following permissions for an Azure Da
 
 You can revoke access to SQL warehouses for a user, service principal, or group by unassigning the Databricks SQL access entitlement.
 
-
 ### Grant the ability to create SQL warehouses.
 
 You can grant SQL warehouse creation privileges to a user, service principal, or group by assigning the Allow unrestricted cluster creation entitlement. 
@@ -21,12 +43,12 @@ Click your username in the top bar of the workspace and select Settings -> Compu
 In the SQL Configuration Parameters textbox, specify one key-value pair per line. Separate the name of the parameter from its value using a space. 
 For example, to enable ANSI_MODE, type "ANSI_MODE true" and click Save
 
-
 ### Configure data access policies for SQL warehouses.
 
 Databricks recommends managing data access policies using Unity Catalog.
 
 ### Transfer ownership of a SQL warehouse
+
 The user you transfer ownership of a SQL warehouse to must have the Allow unrestricted cluster creation entitlement.
 
 * As a workspace admin, log in to your Azure Databricks workspace.
@@ -35,9 +57,3 @@ The user you transfer ownership of a SQL warehouse to must have the Allow unrest
 * Click on the gear icon at the top right and click Assign new owner.
 * Select the user to assign ownership to. Service principals and groups cannot be assigned ownership of a SQL warehouse.
 * Click Confirm.
-
-
-## Data Access Configurations
-
-
-Note: If your workspace is enabled for Unity Catalog, you don’t need to perform the steps in this article. Unity Catalog supports SQL warehouses by default.
