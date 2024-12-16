@@ -1,4 +1,6 @@
-# Dashboards 
+# SQL Dashboards 
+
+Dashboards can be utilized to construct data visualizations and disseminate reports within your team. AI/BI dashboards offer AI-assisted authoring, an advanced visualization library, and an optimized configuration experience, enabling rapid transformation of data into shareable insights.
 
 For this exercise, we will expand on the scope of the queries we did in the Data Discovery lab to build our dashboards to visualize the following fields in the 'nyc_yellow_taxi_delta' table.
 * Passenger Count
@@ -121,6 +123,8 @@ NOTE: By default, your new dashboard is automatically named with its creation ti
     <br>
 
 16.  You have 2 refresh options, you can refresh it manually or via the Schedule button.  Both are available in the upper right of the dashboard.  Check out both to see all the options available.<BR>
+
+      
 For more on this topic check out [Manage scheduled dashboard updates and subscriptions](https://learn.microsoft.com/en-us/azure/databricks/dashboards/schedule-subscribe)
 
 <br>
@@ -130,4 +134,10 @@ To understand your Databricks costs and identify expensive workloads, Databricks
 
 To use the dashboard, set them up in the Account Console. You own and manage the dashboards, so customize them to fit your business. 
 
+
+=======
+
+<B>You have now completed this walkthrough.</b>  
+
+For more on this topic check out [Manage scheduled dashboard updates and subscriptions](https://learn.microsoft.com/en-us/azure/databricks/dashboards/schedule-subscribe)
 
