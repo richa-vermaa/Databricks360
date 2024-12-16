@@ -3,7 +3,7 @@
 Serverless SQL warehouses in Databricks are designed to provide on-demand, scalable compute resources for running SQL queries without the need to manage infrastructure. Here are some key points to understand:
 
 ## What is Serverless Compute?
-Serverless compute allows you to run workloads without provisioning a cluster. Instead, Databricks automatically allocates and manages the necessary compute resources. This enables you to focus on writing code and analysing data without worrying about cluster management or resource utilisation1.
+Serverless compute allows you to run workloads without provisioning a cluster. Instead, Databricks automatically allocates and manages the necessary compute resources. This enables you to focus on writing code and analysing data without worrying about cluster management or resource utilisation.
 
 
 ## Benefits of Serverless SQL Warehouses
