@@ -8,16 +8,16 @@ Serverless compute allows you to run workloads without provisioning a cluster. I
 
 ## Benefits of Serverless SQL Warehouses
 
-**Instant Compute:** Rapid start-up and scaling times for serverless compute resources minimise idle time and ensure you only pay for the compute you use1.
-**Managed Resources:** Cloud resources are managed by Databricks, reducing management overhead and providing instant compute to enhance user productivity1.
-**Security and Reliability: **Capacity handling, security, patching, and upgrades are managed automatically, so you can worry less about reliability, security policies, and capacity shortages1.
-**How Serverless SQL Warehouses Work:** Serverless SQL warehouses use private connectivity between the Databricks control plane and the serverless compute plane in nearly all cases. This ensures secure and efficient data processing2.
+* **Instant Compute:** Rapid start-up and scaling times for serverless compute resources minimise idle time and ensure you only pay for the compute you use.
+* **Managed Resources:** Cloud resources are managed by Databricks, reducing management overhead and providing instant compute to enhance user productivity.
+* **Security and Reliability:** Capacity handling, security, patching, and upgrades are managed automatically, so you can worry less about reliability, security policies, and capacity shortages.
+* **How Serverless SQL Warehouses Work:** Serverless SQL warehouses use private connectivity between the Databricks control plane and the serverless compute plane in nearly all cases. This ensures secure and efficient data processing.
 
 
 ## Use Cases:
-**Interactive Queries:** Ideal for running SQL commands on data objects in the SQL editor or interactive notebooks1.
-**Batch Processing:** Suitable for batch processing tasks where you need to run large volumes of data efficiently1.
-**Enabling Serverless SQL Warehouses:** Serverless SQL warehouses are enabled by default in Databricks. However, you may need to check that your workspace meets the necessary requirements and make any required changes.
+* **Interactive Queries:** Ideal for running SQL commands on data objects in the SQL editor or interactive notebooks.
+* **Batch Processing:** Suitable for batch processing tasks where you need to run large volumes of data efficiently.
+* **Enabling Serverless SQL Warehouses:** Serverless SQL warehouses are enabled by default in Databricks. However, you may need to check that your workspace meets the necessary requirements and make any required changes.
 
 <br>
 
@@ -51,9 +51,9 @@ Databricks recommends managing data access policies using Unity Catalog.
 
 The user you transfer ownership of a SQL warehouse to must have the Allow unrestricted cluster creation entitlement.
 
-* As a workspace admin, log in to your Azure Databricks workspace.
-* Click SQL Warehouses in the sidebar.
-* In a warehouse row, click the Kebab menu kebab menu at the far right and select Permissions. The SQL warehouse permissions display.
-* Click on the gear icon at the top right and click Assign new owner.
-* Select the user to assign ownership to. Service principals and groups cannot be assigned ownership of a SQL warehouse.
-* Click Confirm.
+1. As a workspace admin, log in to your Azure Databricks workspace.
+2. Click SQL Warehouses in the sidebar.
+3. In a warehouse row, click the Kebab menu kebab menu at the far right and select Permissions. The SQL warehouse permissions display.
+4. Click on the gear icon at the top right and click Assign new owner.
+5. Select the user to assign ownership to. Service principals and groups cannot be assigned ownership of a SQL warehouse.
+6. Click Confirm.
